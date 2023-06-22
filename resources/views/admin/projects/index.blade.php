@@ -27,6 +27,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Category</th>
                     <th scope="col" class="text-center">Type</th>
+                    <th scope="col" class="text-center">Technology</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -38,6 +39,13 @@
                         <td>{{ $project->name }}</td>
                         <td class="text-capitalize">{{ $project->category }}</td>
                         <td class="text-center"><span class="badge text-bg-info text-uppercase">{{ $project->type?->name ?? 'undefined' }}</span></td>
+                        <td class="text-center">
+                        @forelse ($project->technologies as $technology )
+                            <span class="badge text-bg-secondary text-uppercase">{{ $technology->name }}</span>
+                        @empty
+                            <span>undefined</span>
+                        @endforelse
+                        </td>
                         <td>{{ $project->is_closed ? 'Closed' : 'Ongoing' }}</td>
                         <td>
                             <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary"><i
@@ -46,19 +54,6 @@
                                     class="fa-solid fa-pencil fa-lg"></i></a>
 
                             @include('admin.partials.delete-form')
-                            {{-- <form
-                                action="{{ route('admin.projects.destroy', $project) }}"
-                                method="POST"
-                                class="d-inline"
-                                onsubmit="return confirm('The project -> {{ $project->name }} will be deleted, are you sure?')">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-danger fw-bold">
-                                    <i class="fa-solid fa-trash-can fa-lg"></i>
-                                </button>
-
-                            </form> --}}
 
                         </td>
                     </tr>
