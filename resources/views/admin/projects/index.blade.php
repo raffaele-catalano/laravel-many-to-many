@@ -40,7 +40,7 @@
                         <td class="text-capitalize">{{ $project->category }}</td>
                         <td class="text-center"><span class="badge text-bg-info text-uppercase">{{ $project->type?->name ?? 'undefined' }}</span></td>
                         <td class="text-center">
-                        @forelse ($project->technologies as $technology )
+                        @forelse ( $project->technologies as $technology )
                             <span class="badge text-bg-warning text-uppercase">{{ $technology->name }}</span>
                         @empty
                             <span>undefined</span>
