@@ -11,7 +11,7 @@
     </div>
 
     <div class="container d-flex justify-content-center mb-2">
-        <img src="{{ asset('storage/' . $project->image_path) }}" alt="" class="w-50">
+        <img src="{{ asset('storage/' . $project->image_path) }}" alt="" class="w-25">
     </div>
     <div class="container d-flex flex-column align-items-center">
         <h5><span class="text-primary">Category:</span> {{ $project->category }}</h5>
@@ -21,7 +21,7 @@
         <h5><span class="text-primary">Status:</span> {{ $project->is_closed ? 'Closed' : 'Ongoing' }}</h5>
         <p>{!! $project->description !!}</p>
     </div>
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center my-3">
         <a href="{{ route('admin.projects.index') }}" class="btn btn-primary mx-2 py-2">
             Back to Projects
         </a>
