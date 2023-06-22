@@ -49,20 +49,6 @@
                         @enderror
                 </div>
 
-                {{-- <div class="input-group mb-3">
-                    <input
-                    class="form-control mb-3"
-                    onchange="showImage(event)"
-                    id="image"
-                    name="image"
-                    type="file"
-                    >
-
-                    <div>
-                        <img id="preview-image" src="" alt="" width="150">
-                    </div>
-                </div> --}}
-
                 <div class="mb-1">
                     <label for="image" class="form-label">Upload Image</label>
                     <input type="file" class="form-control" onchange="showImage(event)" id="image" name="image" aria-describedby="upload" aria-label="Upload">
@@ -127,6 +113,31 @@
                         @error('type_id')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="Technologies" class="form-label d-block">Technologies</label>
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+                        @forelse ( $project_technology as $technology )
+
+                        <input
+                            type="checkbox"
+                            class="btn-check"
+                            id="technology{{ $technology->id }}"
+                            autocomplete="off"
+                            value="{{ $technology->id }}"
+                            name="technologies[]"
+                            @if (in_array($technology->id, old('technologies',[])))
+                                checked
+                            @endif>
+                        <label class="btn btn-outline-primary" for="technology{{ $technology->id }}">{{ $technology->name }}</label>
+
+                        @empty
+                            <span>No technologies avaible to add</span>
+                        @endforelse
+
+                    </div>
                 </div>
 
                 <div class="mb-3">

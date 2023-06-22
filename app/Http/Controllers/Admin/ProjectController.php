@@ -75,6 +75,10 @@ class ProjectController extends Controller
 
         $new_project->save();
 
+        if (array_key_exists('technologies', $form_data)) {
+            $new_project->technologies()->attach($form_data['technologies']);
+        }
+
         return redirect()->route('admin.projects.show', $new_project);
     }
 
