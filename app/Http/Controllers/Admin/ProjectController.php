@@ -46,7 +46,7 @@ class ProjectController extends Controller
     {
         $project_type = Type::all();
         $project_technology = Technology::all();
-        // $project = Project::all();
+
         return view('admin.projects.create', compact('project_type', 'project_technology'));
     }
 
@@ -103,7 +103,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $project_type = Type::all();
-        return view('admin.projects.edit', compact('project', 'project_type'));
+        $project_technology = Technology::all();
+
+        return view('admin.projects.edit', compact('project', 'project_type', 'project_technology'));
     }
 
     /**
@@ -128,6 +130,12 @@ class ProjectController extends Controller
             $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
 
             $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
+        }
+
+        if (array_key_exists('technologies', $form_data)) {
+            $project->technologies()->sync($form_data['technologies']);
+        }else{
+            $project->technologies()->detach();
         }
 
         $project->update(($form_data));
