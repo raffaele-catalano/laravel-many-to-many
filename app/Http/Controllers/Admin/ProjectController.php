@@ -7,6 +7,7 @@ use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -30,6 +31,12 @@ class ProjectController extends Controller
         return view('admin.projects.index', compact('projects', 'direction'));
     }
 
+    // public function technologiesProject() {
+    //     $technologies = Technology::all();
+
+    //     //incompleto
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -38,8 +45,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project_type = Type::all();
+        $project_technology = Technology::all();
         // $project = Project::all();
-        return view('admin.projects.create', compact('project_type'));
+        return view('admin.projects.create', compact('project_type', 'project_technology'));
     }
 
     /**
