@@ -119,23 +119,20 @@
                     <label for="Technologies" class="form-label d-block">Technologies</label>
                     <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 
-                        @forelse ( $project_technology as $technology )
-
-                        <input
-                            type="checkbox"
-                            class="btn-check"
-                            id="technology{{ $technology->id }}"
-                            autocomplete="off"
-                            value="{{ $technology->id }}"
-                            name="technologies[]"
-                            @if (in_array($technology->id, old('technologies',[])))
-                                checked
-                            @endif>
-                        <label class="btn btn-outline-primary" for="technology{{ $technology->id }}">{{ $technology->name }}</label>
-
-                        @empty
-                            <span>No technologies avaible to add</span>
-                        @endforelse
+                        @foreach ($project_technology as $technology)
+                    <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="technology{{$loop->iteration}}"
+                        value="{{$technology->id}}"
+                        name="technologies[]"
+                        autocomplete="off"
+                        @if (in_array($technology->id, old('technologies', [])))
+                            checked
+                        @endif
+                        >
+                    <label class="btn btn-outline-primary" for="technology{{$loop->iteration}}">{{ $technology->name }}</label>
+                @endforeach
 
                     </div>
                 </div>
